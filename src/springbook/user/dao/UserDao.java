@@ -7,6 +7,7 @@ import springbook.user.domain.User;
 import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 public class UserDao {
     private JdbcTemplate jdbcTemplate;
@@ -38,6 +39,23 @@ public class UserDao {
                     }
                 }
         );
+    }
+
+    public List<User> getAll() {
+        return jdbcTemplate.query(
+                "select * from users order by id",
+                new RowMapper<User>() {
+                    @Override
+                    public User mapRow(ResultSet resultSet, int i) throws SQLException {
+                        User user = new User();
+
+                        user.setId(resultSet.getString("id"));
+                        user.setName(resultSet.getString("name"));
+                        user.setPassword(resultSet.getString("password"));
+
+                        return user;
+                    }
+                });
     }
 
     public void deleteAll() {
