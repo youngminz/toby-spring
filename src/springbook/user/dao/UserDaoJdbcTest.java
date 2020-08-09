@@ -13,15 +13,15 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 
-public class UserDaoTest {
-    private UserDao dao;
+public class UserDaoJdbcTest {
+    private UserDaoJdbc dao;
     private User user1;
     private User user2;
     private User user3;
 
     @Before
     public void setUp() {
-        dao = new UserDao();
+        dao = new UserDaoJdbc();
         DataSource dataSource = new SingleConnectionDataSource("jdbc:mysql://localhost/testdb?characterEncoding=UTF-8&serverTimezone=UTC", "root", "", true);
         dao.setDataSource(dataSource);
 
