@@ -20,8 +20,6 @@ public class CalcSumTest {
 
     @Test
     public void sumOfNumbers() throws IOException {
-        Calculator calculator = new Calculator();
-        int sum = calculator.calcSum(numFilepath);
-        assertThat(sum, is(10));
+        assertThat(calculator.calcSum(numFilepath), is(10));
     }
 }
