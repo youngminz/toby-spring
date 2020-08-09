@@ -21,7 +21,7 @@ public class UserDao {
                 user.getId(), user.getName(), user.getPassword());
     }
 
-    public User get(String id) throws SQLException {
+    public User get(String id) {
         return jdbcTemplate.queryForObject(
                 "select * from users where id = ?",
                 new Object[]{id},
@@ -44,7 +44,7 @@ public class UserDao {
         jdbcTemplate.update("delete from users");
     }
 
-    public int getCount() throws SQLException {
+    public int getCount() {
         return jdbcTemplate.queryForInt("select count(*) from users");
     }
 }
