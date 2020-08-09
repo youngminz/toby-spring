@@ -2,6 +2,7 @@ package springbook.user.dao;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.datasource.SingleConnectionDataSource;
 import springbook.user.domain.User;
@@ -28,6 +29,14 @@ public class UserDaoJdbcTest {
         user1 = new User("gyumee", "박성철", "springno1");
         user2 = new User("leegw700", "이길원", "springno2");
         user3 = new User("bumjin", "박범진", "springno3");
+    }
+
+    @Test(expected = DuplicateKeyException.class)
+    public void duplicateKey() {
+        dao.deleteAll();
+
+        dao.add(user1);
+        dao.add(user1);
     }
 
     @Test

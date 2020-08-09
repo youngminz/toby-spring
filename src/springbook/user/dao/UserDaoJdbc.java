@@ -30,13 +30,9 @@ public class UserDaoJdbc implements UserDao {
     }
 
     public void add(final User user) throws DuplicateKeyException {
-        try {
-            jdbcTemplate.update(
-                    "insert into users (id, name, password) values (?, ?, ?)",
-                    user.getId(), user.getName(), user.getPassword());
-        } catch (DuplicateKeyException e) {
-            throw new DuplicateUserIdException(e);
-        }
+        jdbcTemplate.update(
+                "insert into users (id, name, password) values (?, ?, ?)",
+                user.getId(), user.getName(), user.getPassword());
     }
 
     public User get(String id) {
