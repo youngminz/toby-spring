@@ -22,7 +22,7 @@ public class UserDaoJdbc implements UserDao {
             user.setName(resultSet.getString("name"));
             user.setPassword(resultSet.getString("password"));
             user.setLevel(Level.valueOf(resultSet.getInt("level")));
-            user.setLogin(resultSet.getInt("login "));
+            user.setLogin(resultSet.getInt("login"));
             user.setRecommend(resultSet.getInt("recommend"));
 
             return user;
@@ -51,6 +51,16 @@ public class UserDaoJdbc implements UserDao {
         return jdbcTemplate.query(
                 "select * from users order by id",
                 userMapper);
+    }
+
+    @Override
+    public void update(User user) {
+        this.jdbcTemplate.update(
+                "update users set name = ?, password = ?, level = ?, login = ?, " +
+                        "recommend = ? where id = ?", user.getName(), user.getPassword(),
+                user.getLevel().intValue(), user.getLogin(), user.getRecommend(),
+                user.getId()
+        );
     }
 
     public void deleteAll() {
