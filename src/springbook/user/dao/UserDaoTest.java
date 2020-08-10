@@ -14,7 +14,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 
-public class UserDaoJdbcTest {
+public class UserDaoTest {
     private UserDaoJdbc dao;
     private User user1;
     private User user2;
