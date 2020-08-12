@@ -15,6 +15,7 @@ import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+
 import static springbook.user.service.UserService.MIN_LOGCOUNT_FOR_SILVER;
 import static springbook.user.service.UserService.MIN_RECOMMEND_FOR_GOLD;
 
@@ -26,9 +27,6 @@ public class UserServiceTest {
 
     @Autowired
     UserService userService;
-
-    @Autowired
-    UserLevelUpgradePolicy userLevelUpgradePolicy;
 
     List<User> users;
 
