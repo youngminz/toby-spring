@@ -27,9 +27,9 @@ public class UserDaoTest {
         DataSource dataSource = new SingleConnectionDataSource("jdbc:mysql://localhost/testdb?characterEncoding=UTF-8&serverTimezone=UTC", "root", "", true);
         dao.setDataSource(dataSource);
 
-        user1 = new User("gyumee", "박성철", "springno1", Level.BASIC, 1, 0);
-        user2 = new User("leegw700", "이길원", "springno2", Level.SILVER, 55, 10);
-        user3 = new User("bumjin", "박범진", "springno3", Level.GOLD, 100, 40);
+        user1 = new User("gyumee", "박성철", "gyumee@spring.com", "springno1", Level.BASIC, 1, 0);
+        user2 = new User("leegw700", "이길원", "leegw700@spring.com", "springno2", Level.SILVER, 55, 10);
+        user3 = new User("bumjin", "박범진", "bumjin@spring.com", "springno3", Level.GOLD, 100, 40);
     }
 
     @Test(expected = DuplicateKeyException.class)
@@ -93,6 +93,7 @@ public class UserDaoTest {
     private void checkSameUser(User user1, User user2) {
         assertThat(user1.getId(), is(user2.getId()));
         assertThat(user1.getName(), is(user2.getName()));
+        assertThat(user1.getEmail(), is(user2.getEmail()));
         assertThat(user1.getPassword(), is(user2.getPassword()));
         assertThat(user1.getLevel(), is(user2.getLevel()));
         assertThat(user1.getLogin(), is(user2.getLogin()));
@@ -107,6 +108,7 @@ public class UserDaoTest {
         dao.add(user2);
 
         user1.setName("오민규");
+        user1.setEmail("springno6@spring.com");
         user1.setPassword("springno6");
         user1.setLevel(Level.GOLD);
         user1.setLogin(1000);
