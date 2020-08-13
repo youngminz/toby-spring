@@ -14,7 +14,6 @@ import springbook.user.dao.UserDao;
 import springbook.user.domain.Level;
 import springbook.user.domain.User;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -56,49 +55,6 @@ public class UserServiceTest {
         );
     }
 
-    static class MockUserDao implements UserDao {
-        private List<User> users;
-        private List<User> updated = new ArrayList<User>();
-
-        private MockUserDao(List<User> users) {
-            this.users = users;
-        }
-
-        public List<User> getUpdated() {
-            return this.updated;
-        }
-
-        @Override
-        public List<User> getAll() {
-            return this.users;
-        }
-
-        @Override
-        public void update(User user) {
-            updated.add(user);
-        }
-
-        @Override
-        public void add(User user) {
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public User get(String id) {
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public void deleteAll() {
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public int getCount() {
-            throw new UnsupportedOperationException();
-        }
-    }
-
     @Test
     public void upgradeLevels() {
         UserServiceImpl userServiceImpl = new UserServiceImpl();
@@ -123,11 +79,6 @@ public class UserServiceTest {
         List<SimpleMailMessage> mailMessages = mailMessageArg.getAllValues();
         assertThat(mailMessages.get(0).getTo()[0], is(users.get(1).getEmail()));
         assertThat(mailMessages.get(1).getTo()[0], is(users.get(3).getEmail()));
-    }
-
-    private void checkUserAndLevel(User updated, String expectedId, Level expectedLevel) {
-        assertThat(updated.getId(), is(expectedId));
-        assertThat(updated.getLevel(), is(expectedLevel));
     }
 
     private void checkLevelUpgraded(User user, boolean upgraded) {
