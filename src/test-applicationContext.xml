@@ -15,6 +15,9 @@
         <property name="mailSender" ref="mailSender"/>
     </bean>
 
+    <bean id="testUserService" class="springbook.user.service.UserServiceTest$TestUserServiceImpl"
+          parent="userService"/>
+
     <bean id="mailSender" class="springbook.user.service.DummyMailSender"/>
 
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
