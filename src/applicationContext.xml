@@ -27,8 +27,15 @@
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
-    <bean id="transactionAdvice" class="springbook.user.service.TransactionAdvice">
+    <bean id="transactionAdvice" class="org.springframework.transaction.interceptor.TransactionInterceptor">
         <property name="transactionManager" ref="transactionManager"/>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="get*">PROPAGATION_REQUIRED,readOnly,timeout_30</prop>
+                <prop key="upgrade*">PROPAGATION_REQUIRES_NEW,ISOLATION_SERIALIZABLE</prop>
+                <prop key="*">PROPAGATION_REQUIRED</prop>
+            </props>
+        </property>
     </bean>
 
     <aop:config>
